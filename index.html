@@ -4,279 +4,555 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>TUDOCRIA — Loja</title>
+  <title>TUDOCRIA</title>
 
   <style>
-    :root {
-      --verde: #174d35;
-      --verde-escuro: #0d3825;
-      --creme: #f5f0df;
-      --texto: #16231b;
-      --cinza: #68736c;
-      --linha: #dfe4dc;
-      --branco: #ffffff;
-    }
-
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      background: var(--creme);
-      color: var(--texto);
       font-family: Arial, Helvetica, sans-serif;
+      background: #f5f0df;
+      color: #173d2b;
     }
 
-    /* CABEÇALHO */
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: var(--verde);
-      padding: 12px 16px;
+      z-index: 1000;
+
+      background: #0d5c3a;
+      color: white;
+
+      padding: 14px 20px;
+
+      box-shadow: 0 3px 15px rgba(0,0,0,0.15);
     }
 
-    .topo {
-      max-width: 1180px;
+    .header-inner {
+      max-width: 1200px;
       margin: auto;
+
       display: flex;
       align-items: center;
-      gap: 14px;
+      justify-content: space-between;
+      gap: 15px;
     }
 
     .logo {
-      color: white;
-      text-decoration: none;
       font-size: 28px;
       font-weight: 900;
-      letter-spacing: -2px;
+      letter-spacing: -1px;
+      color: #fff;
     }
 
-    .busca {
-      flex: 1;
-    }
-
-    .busca input {
-      width: 100%;
-      padding: 12px 16px;
+    .cart-button {
       border: none;
-      border-radius: 999px;
-      outline: none;
-      font-size: 15px;
-    }
+      background: #f5f0df;
+      color: #0d5c3a;
 
-    .botao-carrinho {
-      border: none;
-      border-radius: 10px;
-      padding: 11px 14px;
-      background: white;
-      color: var(--verde);
-      font-weight: 800;
+      padding: 11px 16px;
+      border-radius: 12px;
+
+      font-size: 16px;
+      font-weight: bold;
+
       cursor: pointer;
+      transition: 0.2s;
     }
 
-    /* CONTEÚDO */
-    main {
-      max-width: 1180px;
-      margin: auto;
-      padding: 18px 16px 70px;
+    .cart-button:hover {
+      transform: scale(1.04);
     }
 
-    h1 {
-      margin: 0;
-      font-size: 24px;
+    #cartCount {
+      background: #0d5c3a;
+      color: white;
+
+      padding: 2px 7px;
+      border-radius: 20px;
+
+      margin-left: 5px;
     }
 
-    .contador {
-      margin-top: 3px;
-      color: var(--cinza);
-      font-size: 13px;
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      max-width: 1200px;
+      margin: 30px auto 20px;
+      padding: 0 20px;
     }
 
-    /* PRODUTOS */
-    .produtos {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 18px;
+    .hero h1 {
+      font-size: 38px;
+      font-weight: 900;
+      margin-bottom: 8px;
     }
 
-    .produto {
+    .hero p {
+      color: #5d6b63;
+      font-size: 16px;
+    }
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    #search {
+      width: 100%;
+
+      padding: 15px 18px;
+
+      border: 2px solid #d6d0bd;
+      border-radius: 14px;
+
       background: white;
-      border: 1px solid var(--linha);
-      border-radius: 16px;
-      overflow: hidden;
+
+      font-size: 16px;
+      outline: none;
     }
 
-    .imagem-produto {
+    #search:focus {
+      border-color: #0d5c3a;
+    }
+
+    /* =========================
+       PRODUCTS
+    ========================= */
+
+    .products-container {
+      max-width: 1200px;
+      margin: 30px auto 80px;
+      padding: 0 20px;
+    }
+
+    .products-grid {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 20px;
+    }
+
+    .product {
+      background: white;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+
+      transition: 0.25s;
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    .product-image {
+      width: 100%;
       aspect-ratio: 1 / 1;
-      background: #eeeeee;
+
+      background: #eee8d6;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
+      overflow: hidden;
     }
 
-    .imagem-produto img {
+    .product-image img {
       width: 100%;
       height: 100%;
+
       object-fit: cover;
-    }
 
-    .info-produto {
-      padding: 12px;
-    }
-
-    .nome-produto {
-      font-weight: 800;
-      min-height: 38px;
-    }
-
-    .preco-produto {
-      color: var(--verde);
-      font-size: 20px;
-      font-weight: 900;
-      margin: 8px 0;
-    }
-
-    .botao-comprar {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: var(--verde);
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .botao-comprar:hover {
-      background: var(--verde-escuro);
-    }
-
-    .estado {
-      grid-column: 1 / -1;
-      background: white;
-      border: 1px solid var(--linha);
-      border-radius: 16px;
-      padding: 40px;
-      text-align: center;
-    }
-
-    /* CARRINHO */
-    .fundo-carrinho {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-      z-index: 50;
-    }
-
-    .fundo-carrinho.aberto {
       display: block;
     }
 
-    .carrinho {
-      position: absolute;
-      right: 0;
+    .no-image {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .product-info {
+      padding: 16px;
+    }
+
+    .product-name {
+      font-size: 17px;
+      font-weight: bold;
+
+      min-height: 42px;
+
+      margin-bottom: 8px;
+    }
+
+    .product-price {
+      font-size: 22px;
+      font-weight: 900;
+
+      color: #0d5c3a;
+
+      margin-bottom: 14px;
+    }
+
+    .add-button {
+      width: 100%;
+
+      border: none;
+
+      background: #0d5c3a;
+      color: white;
+
+      padding: 12px;
+
+      border-radius: 11px;
+
+      font-size: 15px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .add-button:hover {
+      background: #09472d;
+    }
+
+    /* =========================
+       LOADING / EMPTY
+    ========================= */
+
+    .message {
+      text-align: center;
+
+      padding: 50px 20px;
+
+      color: #657169;
+
+      font-size: 17px;
+    }
+
+    .error {
+      color: #a33;
+    }
+
+    /* =========================
+       CART OVERLAY
+    ========================= */
+
+    .cart-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0,0,0,0.45);
+
+      z-index: 2000;
+
+      display: none;
+    }
+
+    .cart-overlay.active {
+      display: block;
+    }
+
+    /* =========================
+       CART
+    ========================= */
+
+    .cart {
+      position: fixed;
+
       top: 0;
-      width: min(430px, 94vw);
-      height: 100%;
-      background: white;
-      padding: 18px;
+      right: -450px;
+
+      width: min(430px, 100%);
+
+      height: 100vh;
+
+      background: #f5f0df;
+
+      z-index: 2100;
+
+      transition: right 0.3s ease;
+
       display: flex;
       flex-direction: column;
+
+      box-shadow: -5px 0 30px rgba(0,0,0,0.2);
     }
 
-    .cabecalho-carrinho {
+    .cart.open {
+      right: 0;
+    }
+
+    .cart-header {
+      background: #0d5c3a;
+      color: white;
+
+      padding: 18px;
+
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
     }
 
-    .fechar {
+    .cart-header h2 {
+      font-size: 21px;
+    }
+
+    .close-cart {
+      background: none;
       border: none;
-      padding: 8px 10px;
-      border-radius: 8px;
+
+      color: white;
+
+      font-size: 28px;
+
       cursor: pointer;
     }
 
-    .itens-carrinho {
+    .cart-items {
       flex: 1;
+
       overflow-y: auto;
-      margin-top: 10px;
+
+      padding: 15px;
     }
 
-    .item-carrinho {
-      display: grid;
-      grid-template-columns: 65px 1fr auto;
-      gap: 10px;
-      padding: 12px 0;
-      border-bottom: 1px solid #ddd;
+    .cart-empty {
+      text-align: center;
+
+      padding: 50px 20px;
+
+      color: #6c756f;
     }
 
-    .item-carrinho img {
-      width: 65px;
-      height: 65px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
+    .cart-item {
+      background: white;
 
-    .quantidade {
+      border-radius: 14px;
+
+      padding: 12px;
+
+      margin-bottom: 12px;
+
       display: flex;
+
+      gap: 12px;
+    }
+
+    .cart-item-image {
+      width: 75px;
+      height: 75px;
+
+      border-radius: 10px;
+
+      overflow: hidden;
+
+      background: #eee8d6;
+
+      flex-shrink: 0;
+    }
+
+    .cart-item-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: bold;
+
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      color: #0d5c3a;
+
+      font-weight: bold;
+
+      margin-bottom: 8px;
+    }
+
+    .quantity {
+      display: flex;
+
       align-items: center;
+
       gap: 8px;
+    }
+
+    .quantity button {
+      width: 27px;
+      height: 27px;
+
+      border: none;
+
+      border-radius: 7px;
+
+      background: #0d5c3a;
+      color: white;
+
+      font-size: 17px;
+
+      cursor: pointer;
+    }
+
+    .quantity span {
+      min-width: 20px;
+
+      text-align: center;
+
+      font-weight: bold;
+    }
+
+    .remove-item {
+      border: none;
+
+      background: none;
+
+      color: #a33;
+
+      cursor: pointer;
+
+      font-size: 13px;
+
       margin-top: 7px;
     }
 
-    .quantidade button {
-      width: 25px;
-      height: 25px;
+    /* =========================
+       CART FOOTER
+    ========================= */
+
+    .cart-footer {
+      padding: 18px;
+
+      background: white;
+
+      border-top: 1px solid #ddd6c2;
+    }
+
+    .cart-total {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 15px;
+    }
+
+    .cart-total span:first-child {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    #cartTotal {
+      font-size: 24px;
+
+      font-weight: 900;
+
+      color: #0d5c3a;
+    }
+
+    .checkout-button {
+      width: 100%;
+
+      border: none;
+
+      background: #0d5c3a;
+      color: white;
+
+      padding: 15px;
+
+      border-radius: 12px;
+
+      font-size: 17px;
+
+      font-weight: bold;
+
       cursor: pointer;
     }
 
-    .total {
-      padding: 14px 0;
-      font-size: 20px;
-      font-weight: 900;
+    .checkout-button:hover {
+      background: #09472d;
     }
 
-    .whatsapp {
-      display: block;
-      padding: 14px;
-      border-radius: 11px;
-      background: #168c4b;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      font-weight: 900;
-    }
+    /* =========================
+       RESPONSIVE
+    ========================= */
 
-    /* CELULAR */
     @media (max-width: 900px) {
-      .produtos {
+      .products-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (max-width: 650px) {
-
-      .topo {
-        flex-wrap: wrap;
-      }
-
-      .busca {
-        order: 3;
-        flex-basis: 100%;
-      }
-
-      .produtos {
+      .products-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 12px;
       }
 
-      main {
-        padding: 14px 10px 60px;
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .product-info {
+        padding: 12px;
+      }
+
+      .product-name {
+        font-size: 15px;
+      }
+
+      .product-price {
+        font-size: 19px;
+      }
+
+      .add-button {
+        padding: 10px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
+
+      .cart-button {
+        padding: 9px 11px;
       }
     }
   </style>
@@ -284,792 +560,1010 @@
 
 <body>
 
-<header>
-  <div class="topo">
+  <!-- HEADER -->
 
-    <a class="logo" href="#">
-      TUDOCRIA
-    </a>
+  <header>
+    <div class="header-inner">
 
-    <div class="busca">
-      <input
-        type="text"
-        id="campoBusca"
-        placeholder="Buscar produto..."
-      >
+      <div class="logo">
+        TUDOCRIA
+      </div>
+
+      <button class="cart-button" onclick="abrirCarrinho()">
+        🛒 Carrinho
+        <span id="cartCount">0</span>
+      </button>
+
     </div>
-
-    <button
-      class="botao-carrinho"
-      id="botaoCarrinho"
-    >
-      🛒 Carrinho (<span id="quantidadeCarrinho">0</span>)
-    </button>
-
-  </div>
-</header>
+  </header>
 
 
-<main>
+  <!-- HERO -->
 
-  <h1>Produtos</h1>
+  <section class="hero">
 
-  <div
-    class="contador"
-    id="contador"
-  >
-    Carregando...
-  </div>
+    <h1>Escolha o seu próximo par.</h1>
 
-  <section
-    class="produtos"
-    id="listaProdutos"
-  >
-
-    <div class="estado">
-      Carregando produtos...
-    </div>
+    <p>
+      Encontre seu estilo e compre direto pelo WhatsApp.
+    </p>
 
   </section>
 
-</main>
+
+  <!-- SEARCH -->
+
+  <div class="search-container">
+
+    <input
+      type="text"
+      id="search"
+      placeholder="Buscar produto..."
+      autocomplete="off"
+    >
+
+  </div>
 
 
-<!-- CARRINHO -->
+  <!-- PRODUCTS -->
 
-<div
-  class="fundo-carrinho"
-  id="fundoCarrinho"
->
+  <main class="products-container">
 
-  <aside class="carrinho">
+    <div id="products" class="products-grid">
 
-    <div class="cabecalho-carrinho">
+      <div class="message">
+        Carregando produtos...
+      </div>
 
-      <h2>
-        Seu carrinho
-      </h2>
+    </div>
+
+  </main>
+
+
+  <!-- CART OVERLAY -->
+
+  <div
+    id="cartOverlay"
+    class="cart-overlay"
+    onclick="fecharCarrinho()"
+  ></div>
+
+
+  <!-- CART -->
+
+  <aside id="cart" class="cart">
+
+    <div class="cart-header">
+
+      <h2>Seu carrinho</h2>
 
       <button
-        class="fechar"
-        id="fecharCarrinho"
+        class="close-cart"
+        onclick="fecharCarrinho()"
       >
-        Fechar
+        ×
       </button>
 
     </div>
 
 
-    <div
-      class="itens-carrinho"
-      id="itensCarrinho"
-    >
+    <div id="cartItems" class="cart-items">
+
+      <div class="cart-empty">
+        Seu carrinho está vazio.
+      </div>
+
     </div>
 
 
-    <div class="total">
-      Total: R$
-      <span id="totalCarrinho">
-        0,00
-      </span>
+    <div class="cart-footer">
+
+      <div class="cart-total">
+
+        <span>Total</span>
+
+        <span id="cartTotal">
+          R$ 0,00
+        </span>
+
+      </div>
+
+      <button
+        class="checkout-button"
+        onclick="finalizarCompra()"
+      >
+        Finalizar compra pelo WhatsApp
+      </button>
+
     </div>
-
-
-    <a
-      class="whatsapp"
-      id="botaoWhatsApp"
-      target="_blank"
-      rel="noopener"
-    >
-      Finalizar pelo WhatsApp
-    </a>
 
   </aside>
 
-</div>
+
+  <script>
+
+    /* =====================================
+       CONFIGURAÇÕES
+    ===================================== */
+
+    const WORKER_URL =
+      "https://tudocria.ricardorodrigues0671.workers.dev";
+
+    const PRODUCT_ENDPOINT =
+      WORKER_URL + "/produtos";
+
+    const WHATSAPP_BASE =
+      "https://wa.me/qr/CRLVURC2X5UTP1?s=p";
 
 
-<script>
+    /* =====================================
+       VARIÁVEIS
+    ===================================== */
 
-/* =====================================================
-   CONFIGURAÇÃO
-===================================================== */
+    let produtos = [];
 
-/*
-   SEU WORKER
-*/
-const WORKER_URL =
-  "https://tudocria.ricardorodrigues0671.workers.dev";
+    let carrinho = [];
 
 
-/*
-   TABELA PRODUTOS
-*/
-const TABLE_ID = "1241177";
+    /* =====================================
+       FUNÇÕES DE CAMPO
+    ===================================== */
 
+    function obterCampo(obj, nomes) {
 
-/*
-   ENDPOINT FINAL
-*/
-const PRODUCT_ENDPOINT =
-  WORKER_URL + "/produtos";
+      for (const nome of nomes) {
 
-
-/*
-   WHATSAPP DO CLIENTE
-*/
-const WHATSAPP_BASE =
-  "https://wa.me/qr/CRLVURC2X5UTP1?s=p";
-
-
-/* =====================================================
-   VARIÁVEIS
-===================================================== */
-
-let produtos = [];
-
-let carrinho = [];
-
-
-/* =====================================================
-   FORMATAÇÃO
-===================================================== */
-
-function formatarPreco(valor) {
-
-  return Number(valor || 0)
-    .toLocaleString(
-      "pt-BR",
-      {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }
-    );
-
-}
-
-
-/* =====================================================
-   SEGURANÇA HTML
-===================================================== */
-
-function escapar(texto) {
-
-  return String(texto ?? "")
-    .replace(/[&<>"']/g, function (caractere) {
-
-      return {
-
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-
-      }[caractere];
-
-    });
-
-}
-
-
-/* =====================================================
-   NORMALIZAR PRODUTO DO BASEROW
-===================================================== */
-
-function normalizarProduto(produto) {
-
-  return {
-
-    id:
-      produto.id ??
-      produto.ID ??
-      produto.pk,
-
-    nome:
-      produto.produto ??
-      produto.nome ??
-      produto.name ??
-      produto["Nome"] ??
-      "Produto",
-
-    preco:
-      Number(
-        produto["preço de venda"] ??
-        produto["preco de venda"] ??
-        produto.preco ??
-        produto.price ??
-        produto["Preço"] ??
-        0
-      ),
-
-    imagem:
-      produto.imagem ??
-      produto.image ??
-      produto.foto ??
-      produto["Imagem"] ??
-      "",
-
-    categoria:
-      produto.categoria ??
-      produto.category ??
-      "",
-
-    ativo:
-      produto.ativo ??
-      produto.active ??
-      true
-
-  };
-
-}
-
-
-/* =====================================================
-   CARREGAR PRODUTOS
-===================================================== */
-
-async function carregarProdutos() {
-
-  const lista =
-    document.getElementById("listaProdutos");
-
-  try {
-
-    const resposta =
-      await fetch(
-        PRODUCT_ENDPOINT +
-        "?table=" +
-        encodeURIComponent(TABLE_ID),
-        {
-          method: "GET",
-          headers: {
-            "Accept": "application/json"
-          }
+        if (
+          obj &&
+          obj[nome] !== undefined &&
+          obj[nome] !== null &&
+          obj[nome] !== ""
+        ) {
+          return obj[nome];
         }
+
+      }
+
+      return "";
+
+    }
+
+
+    /* =====================================
+       IMAGEM DO BASEROW - FILE
+    ===================================== */
+
+    function extrairImagem(campo) {
+
+      if (!campo) {
+        return "";
+      }
+
+
+      /* Baserow normalmente retorna File
+         como um ARRAY de arquivos */
+
+      if (Array.isArray(campo)) {
+
+        if (campo.length === 0) {
+          return "";
+        }
+
+        const arquivo = campo[0];
+
+        if (!arquivo) {
+          return "";
+        }
+
+        return (
+          arquivo.url ||
+          arquivo.signed_url ||
+          arquivo.public_url ||
+          ""
+        );
+      }
+
+
+      /* Caso venha como objeto */
+
+      if (typeof campo === "object") {
+
+        return (
+          campo.url ||
+          campo.signed_url ||
+          campo.public_url ||
+          ""
+        );
+      }
+
+
+      /* Caso venha como texto */
+
+      if (typeof campo === "string") {
+        return campo;
+      }
+
+
+      return "";
+    }
+
+
+    /* =====================================
+       PREÇO
+    ===================================== */
+
+    function converterPreco(valor) {
+
+      if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+      ) {
+        return 0;
+      }
+
+
+      /* Se já for número */
+
+      if (typeof valor === "number") {
+
+        return isFinite(valor)
+          ? valor
+          : 0;
+      }
+
+
+      /* Se vier como texto */
+
+      let texto = String(valor).trim();
+
+      texto = texto
+        .replace("R$", "")
+        .replace(/\s/g, "");
+
+
+      /*
+        Aceita:
+
+        99.90
+        99,90
+        1.00
+        1,00
+      */
+
+      if (
+        texto.includes(",") &&
+        texto.includes(".")
+      ) {
+
+        texto = texto
+          .replace(/\./g, "")
+          .replace(",", ".");
+
+      } else {
+
+        texto = texto.replace(",", ".");
+
+      }
+
+
+      const numero = parseFloat(texto);
+
+
+      return isFinite(numero)
+        ? numero
+        : 0;
+    }
+
+
+    /* =====================================
+       NORMALIZAR PRODUTO
+    ===================================== */
+
+    function normalizarProduto(p) {
+
+      /*
+        IMPORTANTE:
+
+        O preço utilizado é somente:
+
+        Preço venda
+
+        O Preço custo NÃO é utilizado.
+      */
+
+      const nome = obterCampo(
+        p,
+        [
+          "Nome",
+          "nome",
+          "Produto",
+          "produto",
+          "Nome do produto",
+          "nome do produto"
+        ]
       );
 
 
-    if (!resposta.ok) {
+      const precoVenda = obterCampo(
+        p,
+        [
+          "Preço venda",
+          "preço venda",
+          "Preco venda",
+          "preco venda",
 
-      throw new Error(
-        "Worker respondeu HTTP " +
-        resposta.status
+          "Preço de venda",
+          "preço de venda",
+          "Preco de venda",
+          "preco de venda",
+
+          "Preço Venda",
+          "PREÇO VENDA"
+        ]
+      );
+
+
+      const campoImagem = obterCampo(
+        p,
+        [
+          "Imagem",
+          "imagem",
+          "Foto",
+          "foto",
+          "Fotos",
+          "fotos",
+          "Imagem do produto",
+          "imagem do produto"
+        ]
+      );
+
+
+      const imagem = extrairImagem(campoImagem);
+
+
+      return {
+
+        id:
+          p.id ||
+          Math.random().toString(36).slice(2),
+
+        nome:
+          nome ||
+          "Produto",
+
+        preco:
+          converterPreco(precoVenda),
+
+        imagem:
+          imagem
+
+      };
+
+    }
+
+
+    /* =====================================
+       FORMATAR PREÇO
+    ===================================== */
+
+    function formatarPreco(valor) {
+
+      return Number(valor || 0).toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
+        }
       );
 
     }
 
 
-    const dados =
-      await resposta.json();
+    /* =====================================
+       CARREGAR PRODUTOS
+    ===================================== */
+
+    async function carregarProdutos() {
+
+      const container =
+        document.getElementById("products");
 
 
-    const registros =
-      Array.isArray(dados)
-        ? dados
-        : (
-            dados.results ||
-            dados.products ||
-            dados.produtos ||
-            []
+      try {
+
+        container.innerHTML = `
+          <div class="message">
+            Carregando produtos...
+          </div>
+        `;
+
+
+        const resposta =
+          await fetch(PRODUCT_ENDPOINT);
+
+
+        if (!resposta.ok) {
+
+          throw new Error(
+            "Erro HTTP " + resposta.status
           );
 
+        }
 
-    produtos =
-      registros
-        .map(normalizarProduto)
-        .filter(
-          produto =>
-            produto.ativo !== false
+
+        const dados =
+          await resposta.json();
+
+
+        /*
+          O Worker normalmente retorna:
+
+          {
+            count: ...,
+            next: ...,
+            previous: ...,
+            results: [...]
+          }
+
+          Mas também aceitamos diretamente
+          um array.
+        */
+
+        let registros = [];
+
+
+        if (Array.isArray(dados)) {
+
+          registros = dados;
+
+        } else if (
+          dados &&
+          Array.isArray(dados.results)
+        ) {
+
+          registros = dados.results;
+
+        } else {
+
+          registros = [];
+
+        }
+
+
+        produtos =
+          registros.map(normalizarProduto);
+
+
+        console.log(
+          "Produtos recebidos do Baserow:",
+          registros
+        );
+
+        console.log(
+          "Produtos normalizados:",
+          produtos
         );
 
 
-    renderizarProdutos();
+        renderizarProdutos(produtos);
 
 
-  } catch (erro) {
+      } catch (erro) {
 
-    console.error(erro);
-
-    lista.innerHTML = `
-      <div class="estado">
-
-        <b>
-          Não foi possível carregar os produtos.
-        </b>
-
-        <br><br>
-
-        <small>
-          ${escapar(erro.message)}
-        </small>
-
-      </div>
-    `;
-
-  }
-
-}
+        console.error(
+          "Erro ao carregar produtos:",
+          erro
+        );
 
 
-/* =====================================================
-   MOSTRAR PRODUTOS
-===================================================== */
-
-function renderizarProdutos() {
-
-  const busca =
-    document
-      .getElementById("campoBusca")
-      .value
-      .trim()
-      .toLowerCase();
-
-
-  const encontrados =
-    produtos.filter(
-      produto => {
-
-        const texto =
-          produto.nome +
-          " " +
-          produto.categoria;
-
-        return texto
-          .toLowerCase()
-          .includes(busca);
+        container.innerHTML = `
+          <div class="message error">
+            Não foi possível carregar os produtos.
+            <br><br>
+            Tente atualizar a página.
+          </div>
+        `;
 
       }
-    );
+
+    }
 
 
-  document
-    .getElementById("contador")
-    .textContent =
-      encontrados.length +
-      " produto(s)";
+    /* =====================================
+       RENDERIZAR PRODUTOS
+    ===================================== */
+
+    function renderizarProdutos(lista) {
+
+      const container =
+        document.getElementById("products");
 
 
-  if (!encontrados.length) {
+      if (!lista.length) {
 
-    document
-      .getElementById("listaProdutos")
-      .innerHTML = `
-        <div class="estado">
-          Nenhum produto encontrado.
-        </div>
-      `;
-
-    return;
-
-  }
-
-
-  document
-    .getElementById("listaProdutos")
-    .innerHTML =
-
-    encontrados
-      .map(produto => `
-
-        <article class="produto">
-
-          <div class="imagem-produto">
-
-            ${
-              produto.imagem
-
-                ? `
-                  <img
-                    src="${escapar(produto.imagem)}"
-                    alt="${escapar(produto.nome)}"
-                    loading="lazy"
-                  >
-                `
-
-                : `
-                  <span>
-                    Sem imagem
-                  </span>
-                `
-            }
-
+        container.innerHTML = `
+          <div class="message">
+            Nenhum produto encontrado.
           </div>
+        `;
 
+        return;
+      }
 
-          <div class="info-produto">
 
-            <div class="nome-produto">
-              ${escapar(produto.nome)}
-            </div>
+      container.innerHTML =
+        lista.map(produto => {
 
+          const imagemHTML =
+            produto.imagem
+              ? `
+                <img
+                  src="${escapeHTML(produto.imagem)}"
+                  alt="${escapeHTML(produto.nome)}"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=&quot;no-image&quot;>Imagem indisponível</span>';"
+                >
+              `
+              : `
+                <span class="no-image">
+                  Sem imagem
+                </span>
+              `;
 
-            <div class="preco-produto">
-              R$ ${formatarPreco(produto.preco)}
-            </div>
 
+          return `
 
-            <button
-              class="botao-comprar"
-              onclick='adicionarCarrinho(${JSON.stringify(produto.id)})'
-            >
-              Adicionar ao carrinho
-            </button>
+            <article class="product">
 
-          </div>
+              <div class="product-image">
+                ${imagemHTML}
+              </div>
 
-        </article>
 
-      `)
-      .join("");
+              <div class="product-info">
 
-}
+                <div class="product-name">
+                  ${escapeHTML(produto.nome)}
+                </div>
 
 
-/* =====================================================
-   ADICIONAR AO CARRINHO
-===================================================== */
+                <div class="product-price">
+                  ${formatarPreco(produto.preco)}
+                </div>
 
-function adicionarCarrinho(id) {
-
-  const produto =
-    produtos.find(
-      item =>
-        String(item.id) === String(id)
-    );
-
-
-  if (!produto) {
-    return;
-  }
-
-
-  const existente =
-    carrinho.find(
-      item =>
-        String(item.id) === String(id)
-    );
-
-
-  if (existente) {
-
-    existente.quantidade++;
-
-  } else {
-
-    carrinho.push({
-      ...produto,
-      quantidade: 1
-    });
-
-  }
-
-
-  atualizarCarrinho();
-
-  abrirCarrinho();
-
-}
-
-
-/* =====================================================
-   ALTERAR QUANTIDADE
-===================================================== */
-
-function alterarQuantidade(id, valor) {
-
-  const item =
-    carrinho.find(
-      produto =>
-        String(produto.id) === String(id)
-    );
-
-
-  if (!item) {
-    return;
-  }
-
-
-  item.quantidade += valor;
-
-
-  if (item.quantidade <= 0) {
-
-    carrinho =
-      carrinho.filter(
-        produto =>
-          String(produto.id) !== String(id)
-      );
-
-  }
-
-
-  atualizarCarrinho();
-
-}
-
-
-/* =====================================================
-   ATUALIZAR CARRINHO
-===================================================== */
-
-function atualizarCarrinho() {
-
-  const quantidadeTotal =
-    carrinho.reduce(
-      (total, produto) =>
-        total + produto.quantidade,
-      0
-    );
-
-
-  document
-    .getElementById("quantidadeCarrinho")
-    .textContent =
-      quantidadeTotal;
-
-
-  const container =
-    document.getElementById("itensCarrinho");
-
-
-  if (!carrinho.length) {
-
-    container.innerHTML = `
-      <div class="estado">
-        Seu carrinho está vazio.
-      </div>
-    `;
-
-  } else {
-
-    container.innerHTML =
-
-      carrinho
-        .map(produto => `
-
-          <div class="item-carrinho">
-
-            ${
-              produto.imagem
-
-                ? `
-                  <img
-                    src="${escapar(produto.imagem)}"
-                    alt=""
-                  >
-                `
-
-                : `
-                  <div
-                    style="
-                      background:#eee;
-                      border-radius:8px;
-                    "
-                  ></div>
-                `
-            }
-
-
-            <div>
-
-              <b>
-                ${escapar(produto.nome)}
-              </b>
-
-              <br>
-
-              R$
-              ${formatarPreco(produto.preco)}
-
-
-              <div class="quantidade">
 
                 <button
-                  onclick='alterarQuantidade(${JSON.stringify(produto.id)}, -1)'
+                  class="add-button"
+                  onclick="adicionarAoCarrinho('${String(produto.id).replace(/'/g, "\\'")}')"
                 >
-                  −
+                  Adicionar ao carrinho
                 </button>
 
+              </div>
 
-                <span>
-                  ${produto.quantidade}
-                </span>
+            </article>
+
+          `;
+
+        }).join("");
+
+    }
+
+
+    /* =====================================
+       ESCAPAR HTML
+    ===================================== */
+
+    function escapeHTML(valor) {
+
+      return String(valor ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =====================================
+       ADICIONAR AO CARRINHO
+    ===================================== */
+
+    function adicionarAoCarrinho(id) {
+
+      const produto =
+        produtos.find(
+          p => String(p.id) === String(id)
+        );
+
+
+      if (!produto) {
+        return;
+      }
+
+
+      const existente =
+        carrinho.find(
+          item =>
+            String(item.id) === String(id)
+        );
+
+
+      if (existente) {
+
+        existente.quantidade++;
+
+      } else {
+
+        carrinho.push({
+
+          ...produto,
+
+          quantidade: 1
+
+        });
+
+      }
+
+
+      atualizarCarrinho();
+
+      abrirCarrinho();
+
+    }
+
+
+    /* =====================================
+       ALTERAR QUANTIDADE
+    ===================================== */
+
+    function alterarQuantidade(id, quantidade) {
+
+      const item =
+        carrinho.find(
+          p =>
+            String(p.id) === String(id)
+        );
+
+
+      if (!item) {
+        return;
+      }
+
+
+      item.quantidade = quantidade;
+
+
+      if (item.quantidade <= 0) {
+
+        carrinho =
+          carrinho.filter(
+            p =>
+              String(p.id) !== String(id)
+          );
+
+      }
+
+
+      atualizarCarrinho();
+
+    }
+
+
+    /* =====================================
+       REMOVER ITEM
+    ===================================== */
+
+    function removerItem(id) {
+
+      carrinho =
+        carrinho.filter(
+          item =>
+            String(item.id) !== String(id)
+        );
+
+
+      atualizarCarrinho();
+
+    }
+
+
+    /* =====================================
+       ATUALIZAR CARRINHO
+    ===================================== */
+
+    function atualizarCarrinho() {
+
+      const container =
+        document.getElementById("cartItems");
+
+
+      const count =
+        carrinho.reduce(
+          (total, item) =>
+            total + item.quantidade,
+          0
+        );
+
+
+      document.getElementById(
+        "cartCount"
+      ).textContent = count;
+
+
+      if (!carrinho.length) {
+
+        container.innerHTML = `
+          <div class="cart-empty">
+            Seu carrinho está vazio.
+          </div>
+        `;
+
+
+        document.getElementById(
+          "cartTotal"
+        ).textContent =
+          formatarPreco(0);
+
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        carrinho.map(item => {
+
+          const imagem =
+            item.imagem
+              ? `
+                <img
+                  src="${escapeHTML(item.imagem)}"
+                  alt="${escapeHTML(item.nome)}"
+                >
+              `
+              : "";
+
+
+          return `
+
+            <div class="cart-item">
+
+              <div class="cart-item-image">
+                ${imagem}
+              </div>
+
+
+              <div class="cart-item-info">
+
+                <div class="cart-item-name">
+                  ${escapeHTML(item.nome)}
+                </div>
+
+
+                <div class="cart-item-price">
+                  ${formatarPreco(item.preco)}
+                </div>
+
+
+                <div class="quantity">
+
+                  <button
+                    onclick="alterarQuantidade(
+                      '${String(item.id).replace(/'/g, "\\'")}',
+                      ${item.quantidade - 1}
+                    )"
+                  >
+                    −
+                  </button>
+
+
+                  <span>
+                    ${item.quantidade}
+                  </span>
+
+
+                  <button
+                    onclick="alterarQuantidade(
+                      '${String(item.id).replace(/'/g, "\\'")}',
+                      ${item.quantidade + 1}
+                    )"
+                  >
+                    +
+                  </button>
+
+                </div>
 
 
                 <button
-                  onclick='alterarQuantidade(${JSON.stringify(produto.id)}, 1)'
+                  class="remove-item"
+                  onclick="removerItem('${String(item.id).replace(/'/g, "\\'")}')"
                 >
-                  +
+                  Remover
                 </button>
 
               </div>
 
             </div>
 
+          `;
 
-            <strong>
-
-              R$
-              ${formatarPreco(
-                produto.preco *
-                produto.quantidade
-              )}
-
-            </strong>
-
-          </div>
-
-        `)
-        .join("");
-
-  }
+        }).join("");
 
 
-  const total =
-    carrinho.reduce(
-      (soma, produto) =>
-        soma +
-        produto.preco *
-        produto.quantidade,
-      0
-    );
+      const total =
+        carrinho.reduce(
+          (soma, item) =>
+            soma +
+            (item.preco * item.quantidade),
+          0
+        );
 
 
-  document
-    .getElementById("totalCarrinho")
-    .textContent =
-      formatarPreco(total);
+      document.getElementById(
+        "cartTotal"
+      ).textContent =
+        formatarPreco(total);
+
+    }
 
 
-  /* =================================================
-     MENSAGEM DO WHATSAPP
-  ================================================= */
+    /* =====================================
+       ABRIR CARRINHO
+    ===================================== */
 
-  let mensagem;
+    function abrirCarrinho() {
 
-
-  if (carrinho.length) {
-
-    const lista =
-      carrinho
-        .map(
-          produto =>
-            `• ${produto.nome} — ${produto.quantidade} unidade(s) — R$ ${formatarPreco(
-              produto.preco *
-              produto.quantidade
-            )}`
-        )
-        .join("\n");
+      document
+        .getElementById("cart")
+        .classList.add("open");
 
 
-    mensagem =
-      `Olá! Estou interessado nestes produtos:\n` +
-      lista +
-      `\n\n` +
-      `Total: R$ ${formatarPreco(total)}` +
-      `\nGostaria de finalizar a compra.`;
+      document
+        .getElementById("cartOverlay")
+        .classList.add("active");
 
-  } else {
-
-    mensagem =
-      "Olá! Estou interessado em um produto.";
-
-  }
+    }
 
 
-  document
-    .getElementById("botaoWhatsApp")
-    .href =
-      WHATSAPP_BASE +
-      "&text=" +
-      encodeURIComponent(mensagem);
+    /* =====================================
+       FECHAR CARRINHO
+    ===================================== */
 
-}
+    function fecharCarrinho() {
 
-
-/* =====================================================
-   ABRIR CARRINHO
-===================================================== */
-
-function abrirCarrinho() {
-
-  document
-    .getElementById("fundoCarrinho")
-    .classList
-    .add("aberto");
-
-}
+      document
+        .getElementById("cart")
+        .classList.remove("open");
 
 
-/* =====================================================
-   FECHAR CARRINHO
-===================================================== */
+      document
+        .getElementById("cartOverlay")
+        .classList.remove("active");
 
-function fecharCarrinho() {
-
-  document
-    .getElementById("fundoCarrinho")
-    .classList
-    .remove("aberto");
-
-}
+    }
 
 
-/* =====================================================
-   EVENTOS
-===================================================== */
+    /* =====================================
+       CHECKOUT WHATSAPP
+    ===================================== */
 
-document
-  .getElementById("botaoCarrinho")
-  .addEventListener(
-    "click",
-    abrirCarrinho
-  );
+    function finalizarCompra() {
 
+      if (!carrinho.length) {
 
-document
-  .getElementById("fecharCarrinho")
-  .addEventListener(
-    "click",
-    fecharCarrinho
-  );
+        alert(
+          "Seu carrinho está vazio."
+        );
 
-
-document
-  .getElementById("fundoCarrinho")
-  .addEventListener(
-    "click",
-    function(evento) {
-
-      if (
-        evento.target.id ===
-        "fundoCarrinho"
-      ) {
-
-        fecharCarrinho();
+        return;
 
       }
 
+
+      let mensagem =
+        "Olá! Estou interessado nestes produtos:%0A%0A";
+
+
+      let total = 0;
+
+
+      carrinho.forEach(item => {
+
+        const subtotal =
+          item.preco * item.quantidade;
+
+
+        total += subtotal;
+
+
+        mensagem +=
+          "• " +
+          item.nome +
+          " — " +
+          item.quantidade +
+          "x — " +
+          formatarPreco(subtotal) +
+          "%0A";
+
+      });
+
+
+      mensagem +=
+        "%0A" +
+        "Total: " +
+        formatarPreco(total) +
+        "%0A%0A" +
+        "Gostaria de finalizar a compra.";
+
+
+      const url =
+        WHATSAPP_BASE +
+        "&text=" +
+        mensagem;
+
+
+      window.open(
+        url,
+        "_blank"
+      );
+
     }
-  );
 
 
-document
-  .getElementById("campoBusca")
-  .addEventListener(
-    "input",
-    renderizarProdutos
-  );
+    /* =====================================
+       BUSCA
+    ===================================== */
+
+    document
+      .getElementById("search")
+      .addEventListener(
+        "input",
+        function () {
+
+          const termo =
+            this.value
+              .trim()
+              .toLowerCase();
 
 
-/* =====================================================
-   INICIAR
-===================================================== */
+          if (!termo) {
 
-carregarProdutos();
+            renderizarProdutos(
+              produtos
+            );
 
-</script>
+            return;
+
+          }
+
+
+          const filtrados =
+            produtos.filter(
+              produto =>
+                produto.nome
+                  .toLowerCase()
+                  .includes(termo)
+            );
+
+
+          renderizarProdutos(
+            filtrados
+          );
+
+        }
+      );
+
+
+    /* =====================================
+       INICIAR
+    ===================================== */
+
+    carregarProdutos();
+
+  </script>
 
 </body>
 </html>
